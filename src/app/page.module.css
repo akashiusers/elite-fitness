@@ -1,0 +1,408 @@
+.main {
+  min-height: 100vh;
+}
+
+.navbar {
+  background-color: rgba(18, 18, 18, 0.9);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #333;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks a {
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navLinks a:hover {
+  color: var(--accent);
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop') center/cover;
+  text-align: center;
+}
+
+.heroContent h2 {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.joinButton {
+  display: inline-block;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.joinButton:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.joinButton:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.stats {
+  padding: 4rem 0;
+  background-color: var(--card-bg);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.statCard h3 {
+  font-size: 3rem;
+  color: var(--accent);
+  margin: 0 0 0.5rem 0;
+}
+
+.statCard p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.altBg {
+  background-color: var(--card-bg);
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle span {
+  color: var(--accent);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.galleryImage {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.galleryImage:hover {
+  transform: scale(1.05);
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.planCard {
+  background: var(--background);
+  border: 1px solid #333;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.planCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-10px);
+}
+
+.planCard h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+}
+
+.price span {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.planFeatures {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.planFeatures li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.planFeatures li::before {
+  content: '✓';
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+}
+
+.subscribeButton {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.subscribeButton:hover {
+  background: var(--accent);
+}
+
+.promoCard {
+  background: linear-gradient(45deg, var(--accent), #b30000);
+  padding: 3rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.promoCard h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.promoCard p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.promoCard .joinButton {
+  background: white;
+  color: var(--accent);
+  width: auto;
+}
+
+.promoCard .joinButton:hover {
+  background: #f0f0f0;
+}
+
+.trainersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.trainerCard {
+  background: var(--background);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #333;
+}
+
+.trainerImagePlaceholder {
+  width: 120px;
+  height: 120px;
+  background: #333;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.contactForm {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputField, .textArea {
+  width: 100%;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid #333;
+  color: white;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.textArea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.inputField:focus, .textArea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modalContent {
+  background: var(--card-bg);
+  padding: 3rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.closeModal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.closeModal:hover {
+  color: white;
+}
+
+.paymentForm {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.successMessage h2 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 auto 2rem;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+  .heroContent h2 {
+    font-size: 2.5rem;
+  }
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  .modalContent {
+    margin: 1rem;
+    padding: 2rem;
+  }
+}

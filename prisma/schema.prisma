@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Plan {
+  id            String         @id @default(cuid())
+  name          String
+  type          String // Basic, Premium, VIP
+  monthlyPrice  Float
+  features      String // Stored as comma-separated
+  subscriptions Subscription[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Promotion {
+  id         String   @id @default(cuid())
+  title      String
+  discount   Int      // Percentage
+  expiration DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  fullName  String
+  email     String
+  phone     String
+  planId    String
+  plan      Plan     @relation(fields: [planId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  review    String
+  createdAt DateTime @default(now())
+}
+
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  category  String   // Equipment, Cardio, Weightlifting, LockerRoom
+  createdAt DateTime @default(now())
+}
