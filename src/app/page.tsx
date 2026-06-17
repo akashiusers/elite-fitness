@@ -26,15 +26,32 @@ export default function Home() {
     setIsSuccess(false);
   };
 
-  const handlePayment = (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsProcessing(true);
     
-    // Simulate payment processing
-    setTimeout(() => {
+    const formData = new FormData(e.currentTarget);
+    const fullName = formData.get('fullName');
+    const email = formData.get('email');
+    
+    try {
+      await fetch('/api/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName,
+          email,
+          planName: selectedPlan.name,
+          planPrice: selectedPlan.price
+        })
+      });
+      
       setIsProcessing(false);
       setIsSuccess(true);
-    }, 2000);
+    } catch (error) {
+      console.error(error);
+      setIsProcessing(false);
+    }
   };
 
   const closeModal = () => {
@@ -173,8 +190,8 @@ export default function Home() {
                 <p>Vous avez sélectionné : <strong>{selectedPlan.name}</strong> ({selectedPlan.price}$/mois)</p>
                 
                 <form className={styles.paymentForm} onSubmit={handlePayment}>
-                  <input type="text" placeholder="Nom Complet" required className={styles.inputField} />
-                  <input type="email" placeholder="Adresse Email" required className={styles.inputField} />
+                  <input type="text" name="fullName" placeholder="Nom Complet" required className={styles.inputField} />
+                  <input type="email" name="email" placeholder="Adresse Email" required className={styles.inputField} />
                   <input type="text" placeholder="Numéro de carte (Fictif)" required className={styles.inputField} pattern="[0-9]{16}" title="Numéro de carte à 16 chiffres" />
                   
                   <div className={styles.formRow}>
