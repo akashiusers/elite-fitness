@@ -9,14 +9,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    // Check auth cookie
-    if (!document.cookie.includes('admin_auth=true')) {
-      router.push('/admin/login');
-      return;
-    }
-
-    // Fetch subscriptions
+  const fetchSubscriptions = () => {
     fetch('/api/subscriptions')
       .then(res => res.json())
       .then(data => {
@@ -27,6 +20,15 @@ export default function AdminDashboard() {
         console.error(err);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    // Check auth cookie
+    if (!document.cookie.includes('admin_auth=true')) {
+      router.push('/admin/login');
+      return;
+    }
+    fetchSubscriptions();
   }, [router]);
 
   const handleLogout = () => {
@@ -34,7 +36,22 @@ export default function AdminDashboard() {
     router.push('/admin/login');
   };
 
+  const handleDelete = async (id: string) => {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet abonnement ?")) {
+      try {
+        const res = await fetch(`/api/subscriptions/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          fetchSubscriptions();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
   if (loading) return <div className={styles.loading}>Chargement...</div>;
+
+  const totalRevenue = subscriptions.reduce((sum: number, sub: any) => sum + sub.planPrice, 0);
 
   return (
     <div className={styles.container}>
@@ -42,9 +59,20 @@ export default function AdminDashboard() {
         <h2>Tableau de bord Elite Fitness</h2>
         <button onClick={handleLogout} className={styles.logoutBtn}>Déconnexion</button>
       </div>
+
+      <div className={styles.statsGrid}>
+        <div className={styles.statCard}>
+          <div className={styles.statTitle}>Total des Abonnements</div>
+          <div className={styles.statValue}>{subscriptions.length}</div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statTitle}>Revenus Totaux</div>
+          <div className={styles.statValue}>{totalRevenue.toFixed(2)}$</div>
+        </div>
+      </div>
       
       <div className={styles.card}>
-        <h3>Abonnements Récents ({subscriptions.length})</h3>
+        <h3>Abonnements Récents</h3>
         {subscriptions.length === 0 ? (
           <p className={styles.empty}>Aucun abonnement pour le moment.</p>
         ) : (
@@ -57,16 +85,22 @@ export default function AdminDashboard() {
                   <th>Email</th>
                   <th>Forfait</th>
                   <th>Prix</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {subscriptions.slice().reverse().map((sub: any) => (
+                {subscriptions.map((sub: any) => (
                   <tr key={sub.id}>
-                    <td>{new Date(sub.date).toLocaleDateString('fr-FR')} {new Date(sub.date).toLocaleTimeString('fr-FR')}</td>
+                    <td>{new Date(sub.createdAt).toLocaleDateString('fr-FR')} {new Date(sub.createdAt).toLocaleTimeString('fr-FR')}</td>
                     <td>{sub.fullName}</td>
                     <td>{sub.email}</td>
                     <td>{sub.planName}</td>
                     <td>{sub.planPrice}$</td>
+                    <td>
+                      <button onClick={() => handleDelete(sub.id)} className={styles.deleteBtn}>
+                        Supprimer
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
