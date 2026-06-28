@@ -2,7 +2,7 @@ import styles from './Trainers.module.css';
 
 const trainers = [
   { id: 1, name: 'Marcus R.', role: 'Head Coach', specialty: 'Force & Conditionnement', img: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1974&auto=format&fit=crop' },
-  { id: 2, name: 'Elena V.', role: 'Senior Trainer', specialty: 'HIIT & Cardio', img: 'https://images.unsplash.com/photo-1611506109966-c1195a639014?q=80&w=1974&auto=format&fit=crop' },
+  { id: 2, name: 'Erik V.', role: 'Senior Trainer', specialty: 'HIIT & Cardio', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b289b?q=80&w=1974&auto=format&fit=crop' },
   { id: 3, name: 'David K.', role: 'Spécialiste', specialty: 'Mobilité & Récupération', img: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=1974&auto=format&fit=crop' }
 ];
 

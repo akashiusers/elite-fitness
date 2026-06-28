@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor Client
+    participant UI as Interface Web
+    participant API as API Serveur
+    participant DB as Base de Données
+
+    Client->>UI: Sélectionne un forfait
+    UI-->>Client: Affiche modale de paiement
+    Client->>UI: Remplit le formulaire et valide
+    UI->>API: POST /api/subscriptions
+    API->>DB: INSERT INTO subscriptions
+    DB-->>API: Succès
+    API-->>UI: 201 Created
+    UI-->>Client: Affiche message de confirmation

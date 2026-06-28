@@ -1,0 +1,21 @@
+flowchart LR
+    Client([Client])
+    Admin([Administrateur])
+
+    subgraph Elite Fitness
+        UC1(Consulter les forfaits)
+        UC2(Souscrire à un forfait)
+        UC3(S'authentifier)
+        UC4(Consulter les statistiques)
+        UC5(Gérer les abonnés)
+    end
+
+    Client --> UC1
+    Client --> UC2
+    
+    Admin --> UC3
+    Admin --> UC4
+    Admin --> UC5
+    
+    UC4 -.->|include| UC3
+    UC5 -.->|include| UC3

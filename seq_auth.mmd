@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor Admin
+    participant UI as Page de Login
+    participant API as Système Auth
+    
+    Admin->>UI: Saisit email et mot de passe
+    UI->>API: Vérification des identifiants
+    alt Identifiants valides
+        API-->>UI: Création Cookie admin_auth
+        UI-->>Admin: Redirection vers Dashboard
+    else Identifiants invalides
+        API-->>UI: Erreur d'authentification
+        UI-->>Admin: Affichage message d'erreur
+    end
